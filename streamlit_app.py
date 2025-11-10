@@ -83,7 +83,8 @@ if not df_crit_f.empty:
     est = df_crit_f.loc[df_crit_f['carga_maxima'].idxmax(), 'estacao_pico']
     hora = df_crit_f.loc[df_crit_f['carga_maxima'].idxmax(), 'faixa_15']
     lot = pico / capacidade * 100
-    c4.metric("Pico", f"{pico:,.0f}", f"{est} | {hora} ({lot:.1f}%)")
+    #c4.metric("Pico", f"{pico:,.0f}", f"{est} | {hora} ({lot:.1f}%)")
+    c4.metric("Pico", f"{pico:,.0f}", f"{est} | {hora}")
 else:
     c4.metric("Pico", "N/A")
 
@@ -95,9 +96,9 @@ with tab0:
     csv_selecionado = st.selectbox("Selecione o CSV", ["Carga por Estação", "Trecho Crítico", "Estações"])
     
     if csv_selecionado == "Carga por Estação":
-        df_show = df_carga
+        df_show = df_f
     elif csv_selecionado == "Trecho Crítico":
-        df_show = df_critico
+        df_show = df_crit_f
     else:
         df_show = df_stations
     
